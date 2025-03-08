@@ -2,7 +2,6 @@
   "name": "mymart",
   "version": "1.0.0",
   "main": "server.js",
-  "scripts": {
     "scripts": {
     "build": "your-build-command-here",
     "start": "node index.js"
