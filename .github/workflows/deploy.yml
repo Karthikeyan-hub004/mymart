@@ -20,12 +20,12 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      working-directory: . # Update this path to the root directory
+      working-directory: public # Update this path to the root directory
 
     - name: Build project
       run: npm run build
-      working-directory: . # Update this path to the root directory
+      working-directory: public # Update this path to the root directory
 
     - name: Deploy
       run: npm run deploy
-      working-directory: . # Update this path to the root directory
+      working-directory: public # Update this path to the root directory
