@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyMart</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="index.css">
+    
+</head>
+<body>
+    <header>
+        <img src="logo.png" width="50px" height>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search...">
+            <button type="submit" id="search-button"><i class="fa-solid fa-magnifying-glass fa-beat fa-xl"></i></button>
+        </div>
+        <nav>
+            <ul>
+                <li class="profile">
+                    <a href="profile.html" class="profile-button"> 
+                        <img id="profile-picture" src="profile.jpg" width="30px" height="30px">
+                    </a>
+                </li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pro.html">Product</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-plus fa-bounce fa-lg"></i></a></li>
+                <li><a href="payment.html">payments</a></li>
+                <li><a href="signup.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="image-gallery">
+        <img src="ass/image1.jpg" alt="Image 1" class="gallery-image">
+        <img src="ass/image2.jpg" alt="Image 2" class="gallery-image">
+        <img src="ass/image3.jpg" alt="Image 3" class="gallery-image">
+    </div>
+    <div class="suggested-products">
+        <h2>Suggested Products</h2>
+        <div class="suggested-product-cards">
+            <div class="suggested-card" onclick="window.location.href='pro.html'">
+                <img src="ass/suggested1.jpg" >
+                <h3>Product 1</h3>
+                <p>$10.00</p>
+            </div>
+            <div class="suggested-card" onclick="window.location.href='pro.html'">
+                <img src="ass/suggested2.jpg">
+                <h3>Product 2</h3>
+                <p>$20.00</p>
+            </div>
+            <div class="suggested-card" onclick="window.location.href='pro.html'">
+                <img src="ass/suggested3.jpg">
+                <h3>Product 3</h3>
+                <p>$30.00</p>
+            </div>
+            <div class="suggested-card" onclick="window.location.href='pro.html'">
+                <img src="ass/suggested4.jpg">
+                <h3>Product 4</h3>
+                <p>$30.00</p>
+            </div>
+            <div class="suggested-card" onclick="window.location.href='pro.html'">
+                <img src="ass/suggested5.jpg">
+                <h3>Product 5</h3>
+                <p>$30.00</p>
+            </div>
+            <div class="suggested-card" onclick="window.location.href='pro.html'">
+                <img src="ass/suggested6.jpg">
+                <h3>Product 6</h3>
+                <p>$30.00</p>
+            </div>
+            <div class="suggested-card" onclick="window.location.href='pro.html'">
+                <img src="ass/suggested7.jpg">
+                <h3>Product 7</h3>
+                <p>$30.00</p>
+            </div>
+            <div class="suggested-card" onclick="window.location.href='pro.html'">
+                <img src="ass/suggested8.jpg">
+                <h3>Product 8</h3>
+                <p>$30.00</p>
+            </div>
+            <div class="suggested-card" onclick="window.location.href='pro.html'">
+                <img src="ass/suggested9.jpg">
+                <h3>Product 9</h3>
+                <p>$30.00</p>
+            </div>
+            <div class="suggested-card" onclick="window.location.href='pro.html'">
+                <img src="ass/suggested10.jpg">
+                <h3>Product 10</h3>
+                <p>$30.00</p>
+            </div>
+            <div class="suggested-card" onclick="window.location.href='pro.html'">
+                <img src="ass/suggested11.jpg">
+                <h3>Product 11</h3>
+                <p>$30.00</p>
+            </div>
+            <div class="suggested-card" onclick="window.location.href='pro.html'">
+                <img src="ass/suggested12.jpg">
+                <h3>Product 12</h3>
+                <p>$30.00</p>
+            </div>
+        </div>
+    </div>
+    <div class="product-cards">
+        <!-- Product cards go here -->
+    </div>
+
+    <script>
+        function addToCart(productName, productPrice) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ name: productName, price: productPrice });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(productName + ' has been added to your cart.');
+        }
+
+        document.getElementById('search-button').addEventListener('click', function() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                const productName = card.querySelector('h3').textContent.toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Load profile picture from localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileData = JSON.parse(localStorage.getItem('profile'));
+            if (profileData && profileData.profilePicture) {
+                document.getElementById('profile-picture').src = profileData.profilePicture;
+            }
+        });
+    </script>
+</body>
+</html>

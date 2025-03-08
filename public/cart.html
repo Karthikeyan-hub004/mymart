@@ -1,0 +1,73 @@
+<!-- filepath: /c:/Users/karth/OneDrive/Desktop/public/cart.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/1f863e66b3.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyMart - Cart</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" width="50px" height>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search...">
+            <button type="submit" id="search-button"><i class="fa-solid fa-magnifying-glass fa-beat fa-xl"></i></button>
+        </div>
+        <nav>
+            <ul>
+                <li class="profile">
+                    <span class="profile-button"> 
+                        <img src="profile.jpg" width="30px" height="30px">User
+                    </span>
+                </li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pro.html">Product</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-plus fa-bounce fa-lg"></i></a></li>
+                <li><a href="payment.html   ">payments</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="cart-items">
+        <h2>Your Cart</h2>
+        <div id="cart-container"></div>
+    </div>
+    <div class="clear-cart"></div>
+        <button id="clear-cart-button" style="background-color: red; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">Clear Cart</button>
+    </div>
+
+    <script>
+        document.getElementById('clear-cart-button').addEventListener('click', function() {
+            localStorage.removeItem('cart');
+            document.getElementById('cart-container').innerHTML = '';
+            alert('All items have been removed from the cart.');
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartContainer = document.getElementById('cart-container');
+
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" width="100px">
+                    <h3>${item.name}</h3>
+                    <p>$${item.price.toFixed(2)}</p>
+                    <button onclick="buyNow('${item.name}', ${item.price}, '${item.image}')">Buy</button>
+                `;
+                cartContainer.appendChild(cartItem);
+            });
+        });
+
+        function buyNow(productName, productPrice, productImage) {
+            alert('Proceeding to buy ' + productName);
+            // Implement the buy functionality here
+        }
+    </script>
+
+</body>
+</html>

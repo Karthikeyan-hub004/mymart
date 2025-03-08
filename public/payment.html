@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" width="50px" height>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pro.html">Product</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-plus fa-bounce fa-lg"></i></a></li>
+                <li><a href="payment.html">payments</a></li>
+                <li><a href="signup.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Payment</h2>
+        <div id="cart-items" class="product-cards"></div>
+        <div id="total-amount" style="font-size: 20px; font-weight: bold; margin-top: 20px;"></div>
+        <form id="payment-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required><br><br>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required><br><br>
+            <label for="alt-phone">Alternate Phone Number:</label>
+            <input type="tel" id="alt-phone" name="alt-phone" required><br><br>
+            <button type="submit">Cash on Delivery</button>
+        </form>
+    </main>
+    <style>
+        /* General styles for the body */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        header img {
+            vertical-align: middle;
+        }
+        
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        header nav ul li {
+            display: inline;
+        }
+        
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Main content styles */
+        main {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        main h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        /* Form styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        form label {
+            font-weight: bold;
+        }
+        
+        form input[type="text"],
+        form input[type="tel"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        form button {
+            padding: 10px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        form button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const totalAmountContainer = document.getElementById('total-amount');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let totalAmount = 0;
+
+            cart.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                
+                const h3 = document.createElement('h3');
+                h3.textContent = item.name;
+                
+                const p = document.createElement('p');
+                p.textContent = `$${item.price.toFixed(2)}`;
+                
+                card.appendChild(h3);
+                card.appendChild(p);
+                cartItemsContainer.appendChild(card);
+
+                totalAmount += item.price;
+            });
+
+            totalAmountContainer.textContent = `Total Amount: $${totalAmount.toFixed(2)}`;
+        });
+
+        document.getElementById('payment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Order placed successfully! Cash on delivery.');
+            // Redirect to a confirmation page or home page
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

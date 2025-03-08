@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/1f863e66b3.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyMart</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" width="50px" height>
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search...">
+            <button type="submit" id="search-button"><i class="fa-solid fa-magnifying-glass fa-beat fa-xl"></i></button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pro.html">Product</a></li>
+                <li><a href="cart.html"><i class="fa-solid fa-cart-plus fa-bounce fa-lg"></i></a></li>
+                <li><a href="#">payments</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="product-cards">
+        <div class="card">
+            <img src="ass/suggested1.jpg" alt="Product 1">
+            <h3>Product 1</h3>
+            <p>$10.00</p>
+            <button onclick="addToCart('Product 1', 10, 'ass/suggested1.jpg')">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="ass/suggested2.jpg" alt="Product 2">
+            <h3>Product 2</h3>
+            <p>$20.00</p>
+            <button onclick="addToCart('Product 2', 20, 'ass/suggested2.jpg')">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="ass/suggested3.jpg" alt="Product 3">
+            <h3>Product 3</h3>
+            <p>$30.00</p>
+            <button onclick="addToCart('Product 3', 30, 'ass/suggested3.jpg')">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="ass/suggested4.jpg" alt="Product 4">
+            <h3>Product 4</h3>
+            <p>$40.00</p>
+            <button onclick="addToCart('Product 4', 40, 'ass/suggested4.jpg')">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="ass/suggested5.jpg" alt="Product 5">
+            <h3>Product 5</h3>
+            <p>$50.00</p>
+            <button onclick="addToCart('Product 5', 50, 'ass/suggested5.jpg')">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="ass/suggested6.jpg" alt="Product 6">
+            <h3>Product 6</h3>
+            <p>$60.00</p>
+            <button onclick="addToCart('Product 6', 60, 'ass/suggested6.jpg')">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="ass/suggested7.jpg" alt="Product 7">
+            <h3>Product 7</h3>
+            <p>$70.00</p>
+            <button onclick="addToCart('Product 7', 70, 'ass/suggested7.jpg')">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="ass/suggested8.jpg" alt="Product 8">
+            <h3>Product 8</h3>
+            <p>$80.00</p>
+            <button onclick="addToCart('Product 8', 80, 'ass/suggested8.jpg')">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="ass/suggested9.jpg" alt="Product 9">
+            <h3>Product 9</h3>
+            <p>$90.00</p>
+            <button onclick="addToCart('Product 9', 90, 'ass/suggested9.jpg')">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="ass/suggested10.jpg" alt="Product 10">
+            <h3>Product 10</h3>
+            <p>$100.00</p>
+            <button onclick="addToCart('Product 10', 100, 'ass/suggested10.jpg')">Add to Cart</button>
+        </div>
+    </div>
+
+    <script>
+        function addToCart(productName, productPrice, productImage) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ name: productName, price: productPrice, image: productImage });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(productName + ' has been added to your cart.');
+            window.location.href = 'cart.html';
+        }
+
+        document.getElementById('search-button').addEventListener('click', function() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                const productName = card.querySelector('h3').textContent.toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        document.querySelectorAll('.card button').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.parentElement;
+                const productName = card.querySelector('h3').textContent;
+                const productPrice = parseFloat(card.querySelector('p').textContent.replace('$', ''));
+                const productImage = card.querySelector('img').src;
+                addToCart(productName, productPrice, productImage);
+            });
+        });
+    </script>
+
+</body>
+</html>
