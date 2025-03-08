@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository content
+    - name: Checkout repository
       uses: actions/checkout@v2
 
     - name: Set up Node.js
@@ -20,13 +20,12 @@ jobs:
 
     - name: Install dependencies
       run: npm install
+      working-directory: ./relative/path/to/your/directory # Update this path to where package.json is located
 
-    - name: Run build script
+    - name: Build project
       run: npm run build
+      working-directory: ./relative/path/to/your/directory # Update this path to where package.json is located
 
-    - name: Deploy to GitHub Pages
-      if: success()
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist
+    - name: Deploy
+      run: npm run deploy
+      working-directory: ./relative/path/to/your/directory # Update this path to where package.json is located
