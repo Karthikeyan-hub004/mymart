@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
+    "scripts": {
+    "build": "your-build-command-here",
+    "start": "node index.js"
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
@@ -16,6 +19,4 @@
     "mongoose": "^8.12.1"
   }
 }
-"scripts": {
-  "build": "your-build-command"
-}
+
